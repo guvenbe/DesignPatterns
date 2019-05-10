@@ -97,6 +97,7 @@ class LSPDemo
         //Liskov says we should be able substitute derived class for base class  without breaking
         //However that is not the case here. LSP is violated
         // the reason is square set method is setting both height and with
+        //Factory Pattern will help in this case
         Rectangle sq = new Square();
 
         //sq.setHeight(5);
