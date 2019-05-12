@@ -1,11 +1,7 @@
 package com.activemesa.creational.builder.exercise;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static junit.framework.Assert.assertEquals;
 
 class CodeBuilder{
 
@@ -26,6 +22,11 @@ class CodeBuilder{
     Class  build(){
         return theClass;
     }
+
+    @Override
+    public String toString() {
+        return theClass.toString();
+    }
 }
 
 
@@ -39,7 +40,7 @@ class Field {
 
     @Override
     public String toString() {
-        return String.format("public %s %s;", type, name);
+        return String.format("public %s %s;", name, type);
     }
 }
 
@@ -57,7 +58,7 @@ class Class{
         sb.append("public class " + name).append(nl)
                 .append("{").append(nl);
 
-        fields.forEach(f -> sb.append(f).append(nl));
+        fields.forEach(f -> sb.append("  " +f).append(nl));
 
         sb.append("}").append(nl);
 
@@ -70,36 +71,11 @@ public class CodeBuilderExercise {
     public static void main(String[] args) {
 
         Class classz = new CodeBuilder("Person").addFields("name", "String").addFields("age", "int").build();
-        System.out.println(classz);
+        System.out.println(classz.toString());
 
 
 
     }
 }
 
-class Evaluate
-{
-    private String preprocess(String text)
-    {
-        return text.replace("\r\n", "\n").trim();
-    }
 
-    @Test
-    public void emptyTest() {
-        CodeBuilder cb = new CodeBuilder("Foo");
-        assertEquals("public class Foo\n{\n}",
-                preprocess(cb.toString()));
-    }
-
-    @Test
-    public void personTest()
-    {
-        CodeBuilder cb = new CodeBuilder("Person")
-                .addFields("name", "String")
-                .addFields("age", "int");
-        assertEquals("public class Person\n{\n" +
-                        "  public String name;\n" +
-                        "  public int age;\n}",
-                preprocess(cb.toString()));
-    }
-}
