@@ -3,9 +3,9 @@ package com.activemesa.creational.singleton;
 
 import java.io.*;
 
-class BasicSingleton{
+class BasicSingleton implements Serializable{
 
-    public BasicSingleton() {
+    public BasicSingleton()  {
     }
 
     private  static  final  BasicSingleton INSTANCE=new BasicSingleton();
@@ -24,14 +24,14 @@ class BasicSingleton{
     public void setValue(int value) {
         this.value = value;
     }
-
-//     required for correct serialization
+//      Add this back in
+//     FIXES: required for correct serialization
 //     readResolve is used for _replacing_ the object read from the stream
 
-  protected Object readResolve()
-  {
-    return INSTANCE;
-  }
+//  protected Object readResolve()
+//  {
+//    return INSTANCE;
+//  }
 
     // generated getter
 
@@ -39,17 +39,15 @@ class BasicSingleton{
 
 public class BasicSingletonDemo {
 
-    static void  saveToFile(BasicSingleton singleton, String filename) throws Exception{
-
-
-        try(FileOutputStream fileOut= new FileOutputStream(filename);
-            ObjectOutputStream out= new ObjectOutputStream(fileOut);
-        ){
-            //serialization
-            out.writeObject(singleton);
-        }
-
+  static void saveToFile(BasicSingleton singleton, String filename)
+    throws Exception
+  {
+    try (FileOutputStream fileOut = new FileOutputStream(filename);
+         ObjectOutputStream out = new ObjectOutputStream(fileOut))
+    {
+      out.writeObject(singleton);
     }
+  }
 
 
     static BasicSingleton readFromFile(String filename)throws Exception{
@@ -65,9 +63,9 @@ public class BasicSingletonDemo {
 
 
 
-//        final BasicSingleton singleton = BasicSingleton.getInstance();
-//        singleton.setValue(123);
-//        System.out.println(singleton.getValue());
+        final BasicSingleton singleton = BasicSingleton.getInstance();
+        singleton.setValue(123);
+        System.out.println(singleton.getValue());
 
         /*
         * Problems:
