@@ -20,6 +20,7 @@ class LazySingleton{
     // Even though this a outdated approach
     // ***Don't use it if you can avoid it
     // Just be aware of it
+    // Inner Static singleton maybea better approach
     public static LazySingleton getInstance() {
 
         if(instance==null){
