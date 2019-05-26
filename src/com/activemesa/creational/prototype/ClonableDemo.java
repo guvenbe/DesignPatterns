@@ -4,9 +4,17 @@ import java.util.Arrays;
 
 // Cloneable is a marker interface
 
+/*
+* Clone Complicated obkects
+* An existing(partially or fuilly constructed) design is a prototype
+* We make a copy(clone) the prototype and customize
+*   -Required deep copy support
+* We make cloning convinient (eg via factory)
+* */
+
 /********************************************
  *
- * Usibg clonable is not recomended
+ * Usimg clonable is not recomended
  *
  * */
 class Address implements Cloneable {

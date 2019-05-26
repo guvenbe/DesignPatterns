@@ -3,6 +3,20 @@ package com.activemesa.creational.singleton;
 
 import java.io.*;
 
+
+/*
+* Eric Gamma: Design Smell H was in favor of droping it from G4 patterns
+* When one instance makes snse
+*   - Database repository
+*   - Object Factory
+* Eg The constructor call is expensive
+* We do it once
+* We provide everyone with same instance
+* Want to prevent anyone creating additional copies
+* Need to take care of lazy instantiation and thread safety
+*
+* */
+
 class BasicSingleton implements Serializable{
 
     public BasicSingleton()  {

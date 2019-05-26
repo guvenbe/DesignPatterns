@@ -1,4 +1,15 @@
 package com.activemesa.creational.factories;
+/*
+* Object creation bvecomes to convoluted
+* Constuctor is not decriptive
+*       -Nam mandated by containing type
+*       -Cannot overload with same set of arguments with different names
+*       -Can turn i t overloding hell
+* Wholesale Object creation (non-piecewise, unlike builder) ca be outsourced to
+*       -A seperate function(Factoy Method)
+*       -That may exist in seperatory clas (Factory)
+*       -Can create hierarcy of factories with Abstract Factory
+* */
 
 enum CoordinateSystem3
 {

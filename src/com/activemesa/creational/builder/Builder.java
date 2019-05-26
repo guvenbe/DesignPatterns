@@ -3,6 +3,17 @@ package com.activemesa.creational.builder;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
+/*
+* Motivation: Some object are simple and can be created in single constructor call
+* Other object require alt of ceremony. Having 10 constructor auguments is not
+* productive
+* Instead opt for piecewise construction.
+* Builder provides an API for constructing and object step by step
+*
+*
+* */
+
 class HtmlElement
 {
     public String name, text;
