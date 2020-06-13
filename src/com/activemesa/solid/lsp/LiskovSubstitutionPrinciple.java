@@ -1,5 +1,8 @@
 package com.activemesa.solid.lsp;
 
+//Liskov Substitution principle: If you have a base class you should be able substitute
+//a subclass without breaking things
+
 class Rectangle
 {
     protected int width, height;
@@ -37,7 +40,7 @@ class Rectangle
                 ", height=" + height +
                 '}';
     }
-
+    //Fixed Liskov subtitution violation or use Factory pattern
     public boolean isSquare()
     {
         return width == height;
@@ -53,6 +56,7 @@ class Square extends Rectangle
         width = height = size;
     }
 
+    //This violates the liskov substitution principle
     @Override
     public void setWidth(int width) {
         super.setWidth(width);
