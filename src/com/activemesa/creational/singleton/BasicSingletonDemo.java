@@ -6,7 +6,7 @@ import java.io.*;
 
 /*
 * Eric Gamma: Design Smell H was in favor of droping it from G4 patterns
-* When one instance makes snse
+* When one instance makes sence
 *   - Database repository
 *   - Object Factory
 * Eg The constructor call is expensive

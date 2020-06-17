@@ -13,14 +13,14 @@ class StaticBlockSingleton{
     //Cant do final
     private static StaticBlockSingleton instance;
 
-    //Handles initializationissies
-    //This atc like static contructor
+    //Handles initialization issues
+    //This atc like static constructor
     static{
         try {
             instance = new StaticBlockSingleton();
         }
         catch (Exception e){
-            System.err.println("falied to create singleton");
+            System.err.println("failed to create singleton");
         }
     }
 
@@ -30,7 +30,7 @@ class StaticBlockSingleton{
 }
 
 
-public class StaticBlockSingletonemo {
+public class StaticBlockSingletoDemo {
 
     public static void main(String[] args) {
 
