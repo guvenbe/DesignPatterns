@@ -1,8 +1,8 @@
-package com.activemesa.creational.factories;
+package activemesa.creational.factories;
 /*
 * Object creation bvecomes to convoluted
 * Constuctor is not decriptive
-*       -Nam mandated by containing type
+*       -Name mandated by containing type
 *       -Cannot overload with same set of arguments with different names
 *       -Can turn i t overloding hell
 * Wholesale Object creation (non-piecewise, unlike builder) ca be outsourced to
@@ -11,17 +11,12 @@ package com.activemesa.creational.factories;
 *       -Can create hierarcy of factories with Abstract Factory
 * */
 
-enum CoordinateSystem3
-{
-    CARTESIAN,
-    POLAR
-}
 
-class Pointx
+class Point
 {
     private double x, y;
 
-    protected Pointx(double x, double y)
+    private Point(double x, double y)
     {
         this.x = x;
         this.y = y;
@@ -33,35 +28,36 @@ class Pointx
     }
 
     // singleton field
-    public static final Pointx ORIGIN = new Pointx(0,0);
+    public static final Point ORIGIN = new Point(0,0);
 
+    //Inner static class so it can access constructor
     public static class Factory
     {
-        public static Pointx newCartesianPoint(double x, double y)
+        public static Point newCartesianPoint(double x, double y)
         {
-            return new Pointx(x,y);
+            return new Point(x,y);
         }
 
-        public static Pointx newPolarPoint(double rho, double theta)
+        public static Point newPolarPoint(double rho, double theta)
         {
-            return new Pointx(rho*Math.cos(theta), rho*Math.sin(theta));
+            return new Point(rho*Math.cos(theta), rho*Math.sin(theta));
         }
     }
 }
 
 
-class FactoryDemox
+class FactoryDemo
 {
     public static void main(String[] args)
     {
 
-        Pointx origin = Pointx.ORIGIN;
+        Point origin = Point.ORIGIN;
 
-        Pointx pointx = Pointx.Factory.newCartesianPoint(1, 2);
+        Point pointx = Point.Factory.newCartesianPoint(1, 2);
 
         System.out.println(pointx);
 
-        Pointx point2 = Pointx.Factory.newPolarPoint(1.,2);
+        Point point2 = Point.Factory.newPolarPoint(1.,2);
 
         System.out.println(point2);
 

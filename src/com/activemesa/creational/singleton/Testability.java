@@ -1,4 +1,4 @@
-package com.activemesa.creational.singleton;
+package activemesa.creational.singleton;
 
 import com.google.common.collect.Iterables;
 import org.junit.Test;

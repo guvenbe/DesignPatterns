@@ -1,4 +1,4 @@
-package com.activemesa.creational.factories;
+package activemesa.creational.factories;
 
 enum CoordinateSystem1
 {
@@ -16,6 +16,7 @@ class PointXY
         this.y = y;
     }
 
+    //This is ugly Factory method will help solve this
     public PointXY(double a,
                    double b, // names do not communicate intent
                    CoordinateSystem1 cs)
@@ -34,13 +35,13 @@ class PointXY
     }
 
     // steps to add a new system
-    // 1. augment CoordinateSystem1
+    // 1. augment CoordinateSystem
     // 2. change ctor
 
     // singleton field
     public static final PointXY ORIGIN = new PointXY(0,0);
 
-    // factory method
+    // factory methods
     public static PointXY newCartesianPoint(double x, double y)
     {
         return new PointXY(x,y);
@@ -51,13 +52,6 @@ class PointXY
         return new PointXY(rho*Math.cos(theta), rho*Math.sin(theta));
     }
 
-    public static class Factory
-    {
-        public static PointXY newCartesianPoint(double x, double y)
-        {
-            return new PointXY(x,y);
-        }
-    }
 }
 
 class PointFactory
@@ -68,13 +62,12 @@ class PointFactory
     }
 }
 
-class FactoryDemo
+class FactoryMethodDemo
 {
     public static void main(String[] args)
     {
         PointXY pointXY = new PointXY(2, 3, CoordinateSystem1.CARTESIAN);
         PointXY origin = PointXY.ORIGIN;
 
-        PointXY pointXY1 = PointXY.Factory.newCartesianPoint(1, 2);
     }
 }
