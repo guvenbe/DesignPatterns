@@ -2,7 +2,7 @@ package com.activemesa.creational.builder;
 
 // builder inheritance with recursive generics
 
-class Person{
+class Person {
     public String firstName;
     public String lastName;
 
@@ -28,33 +28,33 @@ class Person{
     }
 }
 
-class PersonBuilder<SELF extends PersonBuilder<SELF>>{
+class PersonBuilder<SELF extends PersonBuilder<SELF>> {
 
     protected Person person = new Person();
 
 
     // critical to return SELF here
-    public SELF withLastName(String lastName){
-        person.lastName=lastName;
+    public SELF withLastName(String lastName) {
+        person.lastName = lastName;
         return self();
     }
 
     // critical to return SELF here
-    public SELF withFirstName(String firstName){
-        person.firstName=firstName;
+    public SELF withFirstName(String firstName) {
+        person.firstName = firstName;
         return self();
     }
 
-    public SELF withGender(String gender){
+    public SELF withGender(String gender) {
         person.setGender(gender);
         return self();
     }
 
-    public Person build(){
+    public Person build() {
         return person;
     }
 
-    protected SELF self(){
+    protected SELF self() {
         // unchecked cast, but actually safe
         // proof: try sticking a non-PersonBuilder
         //        as SELF parameter; it won't work!
@@ -62,15 +62,16 @@ class PersonBuilder<SELF extends PersonBuilder<SELF>>{
     }
 
 }
-class EmployeeBuilder extends  PersonBuilder<EmployeeBuilder>{
 
-    public EmployeeBuilder worksAt(String position){
+class EmployeeBuilder extends PersonBuilder<EmployeeBuilder> {
+
+    public EmployeeBuilder worksAt(String position) {
         person.position = position;
         return self();
     }
 
     @Override
-    protected EmployeeBuilder self(){
+    protected EmployeeBuilder self() {
         return this;
     }
 
@@ -80,8 +81,8 @@ public class RecursiveGenericsDemo {
     public static void main(String[] args) {
 
         PersonBuilder personBuilder = new PersonBuilder();
-        Person person =personBuilder.withLastName("Guven").withFirstName("Bora").withGender("male").build();
-        System.out.printf("%s" ,person);
+        Person person = personBuilder.withLastName("Guven").withFirstName("Bora").withGender("male").build();
+        System.out.printf("%s", person);
 
         Person person1 = new EmployeeBuilder().worksAt("GM").withFirstName("Bora").withLastName("Guven").build();
 

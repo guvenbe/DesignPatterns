@@ -3,18 +3,15 @@ package com.activemesa.solid.ocp;
 import java.util.List;
 import java.util.stream.Stream;
 
-enum Color
-{
+enum Color {
     RED, GREEN, BLUE
 }
 
-enum Size
-{
+enum Size {
     SMALL, MEDIUM, LARGE, YUGE
 }
 
-class Product
-{
+class Product {
     public String name;
     public Color color;
     public Size size;
@@ -26,20 +23,16 @@ class Product
     }
 }
 
-class ProductFilter
-{
-    public Stream<Product> filterByColor(List<Product> products, Color color)
-    {
+class ProductFilter {
+    public Stream<Product> filterByColor(List<Product> products, Color color) {
         return products.stream().filter(p -> p.color == color);
     }
 
-    public Stream<Product> filterBySize(List<Product> products, Size size)
-    {
+    public Stream<Product> filterBySize(List<Product> products, Size size) {
         return products.stream().filter(p -> p.size == size);
     }
 
-    public Stream<Product> filterBySizeAndColor(List<Product> products, Size size, Color color)
-    {
+    public Stream<Product> filterBySizeAndColor(List<Product> products, Size size, Color color) {
         return products.stream().filter(p -> p.size == size && p.color == color);
     }
     // state space explosion
@@ -47,18 +40,15 @@ class ProductFilter
 }
 
 // we introduce two new interfaces that are open for extension
-interface Specification<T>
-{
+interface Specification<T> {
     boolean isSatisfied(T item);
 }
 
-interface Filter<T>
-{
+interface Filter<T> {
     Stream<T> filter(List<T> items, Specification<T> spec);
 }
 
-class ColorSpecification implements Specification<Product>
-{
+class ColorSpecification implements Specification<Product> {
     private Color color;
 
     public ColorSpecification(Color color) {
@@ -71,8 +61,7 @@ class ColorSpecification implements Specification<Product>
     }
 }
 
-class SizeSpecification implements Specification<Product>
-{
+class SizeSpecification implements Specification<Product> {
     private Size size;
 
     public SizeSpecification(Size size) {
@@ -85,8 +74,7 @@ class SizeSpecification implements Specification<Product>
     }
 }
 
-class AndSpecification<T> implements Specification<T>
-{
+class AndSpecification<T> implements Specification<T> {
     private Specification<T> first, second;
 
     public AndSpecification(Specification<T> first, Specification<T> second) {
@@ -101,16 +89,14 @@ class AndSpecification<T> implements Specification<T>
 
 }
 
-class BetterFilter implements Filter<Product>
-{
+class BetterFilter implements Filter<Product> {
     @Override
     public Stream<Product> filter(List<Product> items, Specification<Product> spec) {
         return items.stream().filter(p -> spec.isSatisfied(p));
     }
 }
 
-class OCPDemo
-{
+class OCPDemo {
     public static void main(String[] args) {
         Product apple = new Product("Apple", Color.GREEN, Size.SMALL);
         Product tree = new Product("Tree", Color.GREEN, Size.LARGE);

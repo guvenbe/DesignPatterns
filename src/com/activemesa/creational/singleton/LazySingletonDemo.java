@@ -1,6 +1,6 @@
 package com.activemesa.creational.singleton;
 
-class LazySingleton{
+class LazySingleton {
 
     private static LazySingleton instance;
 
@@ -23,11 +23,11 @@ class LazySingleton{
     // Inner Static singleton maybea better approach
     public static LazySingleton getInstance() {
 
-        if(instance==null){
-            synchronized (LazySingleton.class){
+        if (instance == null) {
+            synchronized (LazySingleton.class) {
 
-                if(instance==null){
-                    instance=new LazySingleton();
+                if (instance == null) {
+                    instance = new LazySingleton();
                 }
 
             }
@@ -46,11 +46,11 @@ class LazySingleton{
 }
 
 public class LazySingletonDemo {
-      public static void main(String[] args) {
+    public static void main(String[] args) {
 
-          final LazySingleton instance = LazySingleton.getInstance();
+        final LazySingleton instance = LazySingleton.getInstance();
 
-      }
+    }
 
 }
 

@@ -14,7 +14,7 @@ class InnerStaticSingleton {
 
     }
 
-    public  static InnerStaticSingleton getInstance(){
+    public static InnerStaticSingleton getInstance() {
         System.out.println("Initializing Innerstatic Singleton");
         return Impl.INSTANCE;
     }

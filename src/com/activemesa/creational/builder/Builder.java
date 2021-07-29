@@ -5,40 +5,35 @@ import java.util.Collections;
 
 
 /*
-* Motivation: Some object are simple and can be created in single constructor call
-* Other object require alt of ceremony. Having 10 constructor auguments is not
-* productive
-* Instead opt for piecewise construction.
-* Builder provides an API for constructing and object step by step
-*
-*
-* */
+ * Motivation: Some object are simple and can be created in single constructor call
+ * Other object require alt of ceremony. Having 10 constructor auguments is not
+ * productive
+ * Instead opt for piecewise construction.
+ * Builder provides an API for constructing and object step by step
+ *
+ *
+ * */
 
-class HtmlElement
-{
+class HtmlElement {
     public String name, text;
     public ArrayList<HtmlElement> elements = new ArrayList<HtmlElement>();
     private final int indentSize = 2;
     private final String newLine = System.lineSeparator();
 
-    public HtmlElement()
-    {
+    public HtmlElement() {
     }
 
-    public HtmlElement(String name, String text)
-    {
+    public HtmlElement(String name, String text) {
         this.name = name;
         this.text = text;
     }
 
-    private String toStringImpl(int indent)
-    {
+    private String toStringImpl(int indent) {
         StringBuilder sb = new StringBuilder();
         String i = String.join("", Collections.nCopies(indent * indentSize, " "));
         sb.append(String.format("%s<%s>%s", i, name, newLine));
-        if (text != null && !text.isEmpty())
-        {
-            sb.append(String.join("", Collections.nCopies(indentSize*(indent+1), " ")))
+        if (text != null && !text.isEmpty()) {
+            sb.append(String.join("", Collections.nCopies(indentSize * (indent + 1), " ")))
                     .append(text)
                     .append(newLine);
         }
@@ -51,50 +46,44 @@ class HtmlElement
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return toStringImpl(0);
     }
 }
 
-class HtmlBuilder
-{
+class HtmlBuilder {
     private String rootName;
     private HtmlElement root = new HtmlElement();
 
-    public HtmlBuilder(String rootName)
-    {
+    public HtmlBuilder(String rootName) {
         this.rootName = rootName;
         root.name = rootName;
     }
 
     // not fluent
-    public void addChild(String childName, String childText)
-    {
+    public void addChild(String childName, String childText) {
         HtmlElement e = new HtmlElement(childName, childText);
         root.elements.add(e);
     }
 
-    public HtmlBuilder addChildFluent(String childName, String childText)
-    {
+    public HtmlBuilder addChildFluent(String childName, String childText) {
         HtmlElement e = new HtmlElement(childName, childText);
         root.elements.add(e);
         return this;
     }
 
-    public void clear()
-    {
+    public void clear() {
         root = new HtmlElement();
         root.name = rootName;
     }
 
     // delegating
     @Override
-    public String toString()
-    {
+    public String toString() {
         return root.toString();
     }
 }
+
 public class Builder {
 
 
@@ -109,11 +98,10 @@ public class Builder {
         System.out.println(sb);
 
         // now we want to build a list with 2 words
-        String [] words = {"hello", "world"};
+        String[] words = {"hello", "world"};
         sb.setLength(0); // clear it
         sb.append("<ul>\n");
-        for (String word: words)
-        {
+        for (String word : words) {
             // indentation management, line breaks and other evils
             sb.append(String.format("  <li>%s</li>\n", word));
         }

@@ -4,22 +4,22 @@ package com.activemesa.creational.singleton;
 import java.io.File;
 import java.io.IOException;
 
-class StaticBlockSingleton{
-    private StaticBlockSingleton() throws IOException{
+class StaticBlockSingleton {
+    private StaticBlockSingleton() throws IOException {
         System.out.println("Singleton is initializing");
-        File.createTempFile(".",".");
+        File.createTempFile(".", ".");
 
     }
+
     //Cant do final
     private static StaticBlockSingleton instance;
 
     //Handles initialization issues
     //This atc like static constructor
-    static{
+    static {
         try {
             instance = new StaticBlockSingleton();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.err.println("failed to create singleton");
         }
     }

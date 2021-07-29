@@ -4,14 +4,13 @@ package com.activemesa.creational.builder.exercise;
 import org.junit.Assert;
 
 import static org.junit.Assert.assertEquals;
+
 import com.activemesa.creational.builder.exercise.CodeBuilder;
 import org.junit.jupiter.api.Test;
 
 
-class Evaluate
-{
-    private String preprocess(String text)
-    {
+class Evaluate {
+    private String preprocess(String text) {
         return text.replace("\r\n", "\n").trim();
     }
 
@@ -23,8 +22,7 @@ class Evaluate
     }
 
     @Test
-    public void personTest()
-    {
+    public void personTest() {
         CodeBuilder cb = new CodeBuilder("Person")
                 .addFields("name", "String")
                 .addFields("age", "int");

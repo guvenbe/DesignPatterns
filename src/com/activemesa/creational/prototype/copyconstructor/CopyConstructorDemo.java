@@ -1,26 +1,22 @@
 package com.activemesa.creational.prototype.copyconstructor;
 
 
-class Address
-{
+class Address {
     public String streetAddress, city, country;
 
-    public Address(String streetAddress, String city, String country)
-    {
+    public Address(String streetAddress, String city, String country) {
         this.streetAddress = streetAddress;
         this.city = city;
         this.country = country;
     }
 
     //Copy constructor
-    public Address(Address other)
-    {
+    public Address(Address other) {
         this(other.streetAddress, other.city, other.country);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Address{" +
                 "streetAddress='" + streetAddress + '\'' +
                 ", city='" + city + '\'' +
@@ -29,27 +25,23 @@ class Address
     }
 }
 
-class Employee
-{
+class Employee {
     public String name;
     public Address address;
 
-    public Employee(String name, Address address)
-    {
+    public Employee(String name, Address address) {
         this.name = name;
         this.address = address;
     }
 
     //Copy constructor
-    public Employee(Employee other)
-    {
+    public Employee(Employee other) {
         name = other.name;
         address = new Address(other.address);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", address=" + address +
@@ -59,8 +51,7 @@ class Employee
 
 public class CopyConstructorDemo {
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Employee john = new Employee("John",
                 new Address("123 London Road", "London", "UK"));
 

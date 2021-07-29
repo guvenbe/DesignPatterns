@@ -4,7 +4,7 @@ package com.activemesa.creational.singleton;
 //
 
 
-class CheifExecutiveOfficer{
+class CheifExecutiveOfficer {
 
     //For Mono state make fields static
     private static String name;

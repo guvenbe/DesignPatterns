@@ -4,8 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-class Square
-{
+class Square {
     public int side;
 
     public Square(int side) {
@@ -14,17 +13,18 @@ class Square
 }
 
 
-interface  Rectangle{
+interface Rectangle {
     int getWidth();
+
     int getHeight();
 
-    default int getArea(){
+    default int getArea() {
         return getWidth() * getHeight();
     }
 }
 
 
-class SquareToRectangleAdapter  implements Rectangle{
+class SquareToRectangleAdapter implements Rectangle {
 
     private Square square;
 
@@ -33,7 +33,7 @@ class SquareToRectangleAdapter  implements Rectangle{
     }
 
     @Override
-    public int getWidth(){
+    public int getWidth() {
         return square.side;
     }
 
@@ -46,10 +46,9 @@ class SquareToRectangleAdapter  implements Rectangle{
 }
 
 
-public class SquareToRectangleAdapterDemo{
+public class SquareToRectangleAdapterDemo {
     @Test
-    public void test()
-    {
+    public void test() {
         Square sq = new Square(11);
         SquareToRectangleAdapter adapter = new SquareToRectangleAdapter(sq);
         assertEquals(121, adapter.getArea());

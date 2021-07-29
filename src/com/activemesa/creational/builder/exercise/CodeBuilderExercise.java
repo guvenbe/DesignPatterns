@@ -3,23 +3,23 @@ package com.activemesa.creational.builder.exercise;
 import java.util.ArrayList;
 import java.util.List;
 
-class CodeBuilder{
+class CodeBuilder {
 
     private Class theClass = new Class();
 
-    public CodeBuilder(String rootName){
+    public CodeBuilder(String rootName) {
 
         theClass.name = rootName;
 
     }
 
-    public CodeBuilder addFields(String name, String type){
+    public CodeBuilder addFields(String name, String type) {
         theClass.fields.add(new Field(name, type));
 
-        return  this;
+        return this;
     }
 
-    Class  build(){
+    Class build() {
         return theClass;
     }
 
@@ -44,21 +44,22 @@ class Field {
     }
 }
 
-class Class{
+class Class {
     public String name;
     public List<Field> fields = new ArrayList<>();
 
-    public Class() {}
+    public Class() {
+    }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         String nl = System.lineSeparator();
 
         sb.append("public class " + name).append(nl)
                 .append("{").append(nl);
 
-        fields.forEach(f -> sb.append("  " +f).append(nl));
+        fields.forEach(f -> sb.append("  " + f).append(nl));
 
         sb.append("}").append(nl);
 
@@ -72,7 +73,6 @@ public class CodeBuilderExercise {
 
         Class classz = new CodeBuilder("Person").addFields("name", "String").addFields("age", "int").build();
         System.out.println(classz.toString());
-
 
 
     }

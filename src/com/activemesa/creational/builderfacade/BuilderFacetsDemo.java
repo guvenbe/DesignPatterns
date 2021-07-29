@@ -1,6 +1,6 @@
 package com.activemesa.creational.builderfacade;
 
-class Person{
+class Person {
 
     //Address
     public String streetAddress, postcode, city;
@@ -23,62 +23,64 @@ class Person{
 }
 
 //builder facade
-class PersonBuilder{
+class PersonBuilder {
 
     protected Person person = new Person();
 
-    public PersonAddressBuilder lives(){
+    public PersonAddressBuilder lives() {
         return new PersonAddressBuilder(person);
     }
-    public PersonJobBuilder works(){
+
+    public PersonJobBuilder works() {
         return new PersonJobBuilder(person);
     }
 
-    public Person build(){
+    public Person build() {
         return person;
     }
 }
 
-class PersonAddressBuilder extends  PersonBuilder{
+class PersonAddressBuilder extends PersonBuilder {
 
     public PersonAddressBuilder(Person person) {
-        this.person=person;
+        this.person = person;
     }
 
-    public PersonAddressBuilder at(String streetAddress){
-        person.streetAddress=streetAddress;
-        return this;
-    }
-    public PersonAddressBuilder withPostCode(String postCode){
-        person.postcode=postCode;
+    public PersonAddressBuilder at(String streetAddress) {
+        person.streetAddress = streetAddress;
         return this;
     }
 
-    public PersonAddressBuilder in(String city){
-        person.city=city;
+    public PersonAddressBuilder withPostCode(String postCode) {
+        person.postcode = postCode;
+        return this;
+    }
+
+    public PersonAddressBuilder in(String city) {
+        person.city = city;
         return this;
     }
 
 }
 
-class PersonJobBuilder extends PersonBuilder{
+class PersonJobBuilder extends PersonBuilder {
 
     public PersonJobBuilder(Person person) {
-        this.person=person;
+        this.person = person;
     }
 
-    PersonJobBuilder at(String companyName){
-        person.companyName=companyName;
+    PersonJobBuilder at(String companyName) {
+        person.companyName = companyName;
         return this;
     }
 
-    PersonJobBuilder asA(String position){
-        person.position=position;
+    PersonJobBuilder asA(String position) {
+        person.position = position;
         return this;
     }
 
-    PersonJobBuilder earning(int annualIncome){
-        person.annualIncome=annualIncome;
+    PersonJobBuilder earning(int annualIncome) {
+        person.annualIncome = annualIncome;
         return this;
     }
 
@@ -91,18 +93,15 @@ public class BuilderFacetsDemo {
 
         Person person = new PersonBuilder()
                 .lives()
-                    .at("123 Elm Street")
-                    .in("London")
-                    .withPostCode("12345")
+                .at("123 Elm Street")
+                .in("London")
+                .withPostCode("12345")
                 .works()
-                    .asA("Enginner")
-                    .at("GM")
-                    .earning(50000)
+                .asA("Enginner")
+                .at("GM")
+                .earning(50000)
                 .build();
         System.out.println(person);
-
-
-
 
 
     }

@@ -1,23 +1,21 @@
 package activemesa.creational.factories;
 /*
-* Object creation bvecomes to convoluted
-* Constuctor is not decriptive
-*       -Name mandated by containing type
-*       -Cannot overload with same set of arguments with different names
-*       -Can turn i t overloding hell
-* Wholesale Object creation (non-piecewise, unlike builder) ca be outsourced to
-*       -A seperate function(Factoy Method)
-*       -That may exist in seperatory clas (Factory)
-*       -Can create hierarcy of factories with Abstract Factory
-* */
+ * Object creation bvecomes to convoluted
+ * Constuctor is not decriptive
+ *       -Name mandated by containing type
+ *       -Cannot overload with same set of arguments with different names
+ *       -Can turn i t overloding hell
+ * Wholesale Object creation (non-piecewise, unlike builder) ca be outsourced to
+ *       -A seperate function(Factoy Method)
+ *       -That may exist in seperatory clas (Factory)
+ *       -Can create hierarcy of factories with Abstract Factory
+ * */
 
 
-class Point
-{
+class Point {
     private double x, y;
 
-    private Point(double x, double y)
-    {
+    private Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -28,28 +26,23 @@ class Point
     }
 
     // singleton field
-    public static final Point ORIGIN = new Point(0,0);
+    public static final Point ORIGIN = new Point(0, 0);
 
     //Inner static class so it can access constructor
-    public static class Factory
-    {
-        public static Point newCartesianPoint(double x, double y)
-        {
-            return new Point(x,y);
+    public static class Factory {
+        public static Point newCartesianPoint(double x, double y) {
+            return new Point(x, y);
         }
 
-        public static Point newPolarPoint(double rho, double theta)
-        {
-            return new Point(rho*Math.cos(theta), rho*Math.sin(theta));
+        public static Point newPolarPoint(double rho, double theta) {
+            return new Point(rho * Math.cos(theta), rho * Math.sin(theta));
         }
     }
 }
 
 
-class FactoryDemo
-{
-    public static void main(String[] args)
-    {
+class FactoryDemo {
+    public static void main(String[] args) {
 
         Point origin = Point.ORIGIN;
 
@@ -57,7 +50,7 @@ class FactoryDemo
 
         System.out.println(pointx);
 
-        Point point2 = Point.Factory.newPolarPoint(1.,2);
+        Point point2 = Point.Factory.newPolarPoint(1., 2);
 
         System.out.println(point2);
 

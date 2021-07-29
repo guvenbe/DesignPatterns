@@ -2,24 +2,20 @@ package com.activemesa.creational.factories.excercise;
 
 import static org.junit.Assert.assertEquals;
 
-class Person
-{
+class Person {
     public int id;
     public String name;
 
-    public Person(int id, String name)
-    {
+    public Person(int id, String name) {
         this.id = id;
         this.name = name;
     }
 }
 
-class PersonFactory
-{
+class PersonFactory {
     private int id = 0;
 
-    public Person createPerson(String name)
-    {
+    public Person createPerson(String name) {
         return new Person(id++, name);
     }
 }

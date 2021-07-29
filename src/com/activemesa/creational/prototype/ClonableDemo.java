@@ -5,12 +5,12 @@ import java.util.Arrays;
 // Cloneable is a marker interface
 
 /*
-* Clone Complicated obkects
-* An existing(partially or fuilly constructed) design is a prototype
-* We make a copy(clone) the prototype and customize
-*   -Required deep copy support
-* We make cloning convinient (eg via factory)
-* */
+ * Clone Complicated obkects
+ * An existing(partially or fuilly constructed) design is a prototype
+ * We make a copy(clone) the prototype and customize
+ *   -Required deep copy support
+ * We make cloning convinient (eg via factory)
+ * */
 
 /********************************************
  *
@@ -21,15 +21,13 @@ class Address implements Cloneable {
     public String streetName;
     public int houseNumber;
 
-    public Address(String streetName, int houseNumber)
-    {
+    public Address(String streetName, int houseNumber) {
         this.streetName = streetName;
         this.houseNumber = houseNumber;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Address{" +
                 "streetName='" + streetName + '\'' +
                 ", houseNumber=" + houseNumber +
@@ -38,26 +36,22 @@ class Address implements Cloneable {
 
     // base class clone() is protected
     @Override
-    public Object clone() throws CloneNotSupportedException
-    {
+    public Object clone() throws CloneNotSupportedException {
         return new Address(streetName, houseNumber);
     }
 }
 
-class Person implements Cloneable
-{
-    public String [] names;
+class Person implements Cloneable {
+    public String[] names;
     public Address address;
 
-    public Person(String[] names, Address address)
-    {
+    public Person(String[] names, Address address) {
         this.names = names;
         this.address = address;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Person{" +
                 "names=" + Arrays.toString(names) +
                 ", address=" + address +
@@ -65,8 +59,7 @@ class Person implements Cloneable
     }
 
     @Override
-    public Object clone() throws CloneNotSupportedException
-    {
+    public Object clone() throws CloneNotSupportedException {
         return new Person(
                 // clone() creates a shallow copy!
                 /*names */ names.clone(),
@@ -78,20 +71,18 @@ class Person implements Cloneable
     }
 }
 
-class CloneableDemo
-{
+class CloneableDemo {
     public static void main(String[] args)
-            throws CloneNotSupportedException
-    {
+            throws CloneNotSupportedException {
         Person john = new Person(new String[]{"John", "Smith"},
                 new Address("London Road", 123));
 
         // shallow copy, not good:
         Person jane = john;
-        jane.names[0]="jane";
+        jane.names[0] = "jane";
         //they both became jane not good.
-        System.out.println("bad" +jane);
-        System.out.println("bad" +john);
+        System.out.println("bad" + jane);
+        System.out.println("bad" + john);
 
         // jane is the girl next door
         Person jane2 = (Person) john.clone();

@@ -3,19 +3,16 @@ package com.activemesa.structural.adapter.withcaching;
 import java.util.*;
 import java.util.function.Consumer;
 
-class Point
-{
+class Point {
     public int x, y;
 
-    public Point(int x, int y)
-    {
+    public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -26,16 +23,14 @@ class Point
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = x;
         result = 31 * result + y;
         return result;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Point{" +
                 "first=" + x +
                 ", second=" + y +
@@ -43,19 +38,16 @@ class Point
     }
 }
 
-class Line
-{
+class Line {
     public Point start, end;
 
-    public Line(Point start, Point end)
-    {
+    public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -66,35 +58,31 @@ class Line
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = start.hashCode();
         result = 31 * result + end.hashCode();
         return result;
     }
 }
 
-class VectorObject extends ArrayList<Line> {}
+class VectorObject extends ArrayList<Line> {
+}
 
-class VectorRectangle extends VectorObject
-{
-    public VectorRectangle(int x, int y, int width, int height)
-    {
-        add(new Line(new Point(x,y), new Point(x+width, y) ));
-        add(new Line(new Point(x+width,y), new Point(x+width, y+height) ));
-        add(new Line(new Point(x,y), new Point(x, y+height) ));
-        add(new Line(new Point(x,y+height), new Point(x+width, y+height) ));
+class VectorRectangle extends VectorObject {
+    public VectorRectangle(int x, int y, int width, int height) {
+        add(new Line(new Point(x, y), new Point(x + width, y)));
+        add(new Line(new Point(x + width, y), new Point(x + width, y + height)));
+        add(new Line(new Point(x, y), new Point(x, y + height)));
+        add(new Line(new Point(x, y + height), new Point(x + width, y + height)));
     }
 }
 
-class LineToPointAdapter implements Iterable<Point>
-{
+class LineToPointAdapter implements Iterable<Point> {
     private static int count = 0;
     private static Map<Integer, List<Point>> cache = new HashMap<>();
     private int hash;
 
-    public LineToPointAdapter(Line line)
-    {
+    public LineToPointAdapter(Line line) {
         hash = line.hashCode();
         if (cache.get(hash) != null) return; // we already have it
 
@@ -111,17 +99,12 @@ class LineToPointAdapter implements Iterable<Point>
         int dx = right - left;
         int dy = line.end.y - line.start.y;
 
-        if (dx == 0)
-        {
-            for (int y = top; y <= bottom; ++y)
-            {
+        if (dx == 0) {
+            for (int y = top; y <= bottom; ++y) {
                 points.add(new Point(left, y));
             }
-        }
-        else if (dy == 0)
-        {
-            for (int x = left; x <= right; ++x)
-            {
+        } else if (dy == 0) {
+            for (int x = left; x <= right; ++x) {
                 points.add(new Point(x, top));
             }
         }
@@ -130,51 +113,42 @@ class LineToPointAdapter implements Iterable<Point>
     }
 
     @Override
-    public Iterator<Point> iterator()
-    {
+    public Iterator<Point> iterator() {
         return cache.get(hash).iterator();
     }
 
     @Override
-    public void forEach(Consumer<? super Point> action)
-    {
+    public void forEach(Consumer<? super Point> action) {
         cache.get(hash).forEach(action);
     }
 
     @Override
-    public Spliterator<Point> spliterator()
-    {
+    public Spliterator<Point> spliterator() {
         return cache.get(hash).spliterator();
     }
 }
 
-class AdapterDemo
-{
+class AdapterDemo {
     private static final List<VectorObject> vectorObjects =
             new ArrayList<>(Arrays.asList(
-                    new VectorRectangle(1,1,10,10),
-                    new VectorRectangle(3,3,6,6)
+                    new VectorRectangle(1, 1, 10, 10),
+                    new VectorRectangle(3, 3, 6, 6)
             ));
 
-    public static void drawPoint(Point p)
-    {
+    public static void drawPoint(Point p) {
         System.out.print(".");
     }
 
-    private static void draw()
-    {
-        for (VectorObject vo : vectorObjects)
-        {
-            for (Line line : vo)
-            {
+    private static void draw() {
+        for (VectorObject vo : vectorObjects) {
+            for (Line line : vo) {
                 LineToPointAdapter adapter = new LineToPointAdapter(line);
                 adapter.forEach(point -> drawPoint(point));
             }
         }
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         draw();
         draw();
     }

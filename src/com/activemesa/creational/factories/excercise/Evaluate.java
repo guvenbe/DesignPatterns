@@ -4,11 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class Evaluate
-{
+public class Evaluate {
     @Test
-    public void test()
-    {
+    public void test() {
         PersonFactory pf = new PersonFactory();
 
         Person p1 = pf.createPerson("Chris");

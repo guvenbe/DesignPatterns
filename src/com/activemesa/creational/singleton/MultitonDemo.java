@@ -2,20 +2,17 @@ package com.activemesa.creational.singleton;
 
 import java.util.HashMap;
 
-enum Subsystem
-{
+enum Subsystem {
     PRIMARY,
     AUXILIARY,
     FALLBACK
 }
 
 
-class Printer
-{
+class Printer {
     private static int instanceCount = 0;
 
-    private Printer()
-    {
+    private Printer() {
         instanceCount++;
         System.out.println("A total of " +
                 instanceCount + " instances created so far.");
@@ -24,8 +21,7 @@ class Printer
     private static HashMap<Subsystem, Printer>
             instances = new HashMap<>();
 
-    public static Printer get(Subsystem ss)
-    {
+    public static Printer get(Subsystem ss) {
         if (instances.containsKey(ss))
             return instances.get(ss);
 

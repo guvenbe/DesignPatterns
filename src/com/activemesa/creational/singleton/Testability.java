@@ -13,8 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-interface Database
-{
+interface Database {
     int getPopulation(String name);
 }
 
@@ -75,16 +74,14 @@ class SingletonRecordFinder {
 }
 
 //Allows contructor Injection
-class ConfigurableRecordFinder
-{
+class ConfigurableRecordFinder {
     private Database database;
 
     public ConfigurableRecordFinder(Database database) {
         this.database = database;
     }
 
-    public int getTotalPopulation(List<String> names)
-    {
+    public int getTotalPopulation(List<String> names) {
         int result = 0;
         for (String name : names)
             result += database.getPopulation(name);
@@ -93,8 +90,7 @@ class ConfigurableRecordFinder
 }
 
 
-class DummyDatabase implements Database
-{
+class DummyDatabase implements Database {
     private Dictionary<String, Integer> data = new Hashtable<>();
 
     public DummyDatabase() {
@@ -104,15 +100,13 @@ class DummyDatabase implements Database
     }
 
     @Override
-    public int getPopulation(String name)
-    {
+    public int getPopulation(String name) {
         return data.get(name);
     }
 }
 
 
 public class Testability {
-
 
 
     public static void main(String[] args) {
@@ -129,19 +123,17 @@ public class Testability {
 
     //This is more of integration test since it requires a real database
     @Test
-    public void singletonTotalPopulationTest()
-    {
+    public void singletonTotalPopulationTest() {
         // testing on a live database
         SingletonRecordFinder rf = new SingletonRecordFinder();
         List<String> names = List.of("Seoul", "Mexico City");
         int tp = rf.getTotalPopulation(names);
-        assertEquals(17500000+17400000, tp);
+        assertEquals(17500000 + 17400000, tp);
     }
 
     //This is a UNIT test
     @Test
-    public void dependentPopulationTest()
-    {
+    public void dependentPopulationTest() {
         DummyDatabase db = new DummyDatabase();
         ConfigurableRecordFinder rf = new ConfigurableRecordFinder(db);
         assertEquals(4, rf.getTotalPopulation(
